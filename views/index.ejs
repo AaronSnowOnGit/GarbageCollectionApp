@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corner Brook Garbage Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Hero image with header overlaid -->
+    <div id="hero">
+        <header>
+            <img src="/images/logo.png" alt="City of Corner Brook">
+            <h1>Garbage Collection</h1>
+            <a href="https://www.cornerbrook.com/" target="_blank">
+                <button>🔗 City Website</button>
+            </a>
+        </header>
+    </div>
+
+    <div class="content">
+        <div class="info-banner">
+            <p>Recycling must be in blue bags and sorted according to the weekly stream of fibres and containers.</p>
+            <p>Garbage must be in clear bags and placed into your cart by 8AM to ensure collection.</p>
+        </div>
+
+        <!-- Displays what zone gets picked up today and tomorrow -->
+        <!-- *NEEDS FUNCTIONS ADDED IN BACKEND -->
+        <div id="current-info">
+            <div>
+                <p><%= today.date %></p>
+                <% if (today.zone) { %>
+                    <p>Day <%= today.zone %> collection</p>
+                <% } else { %>
+                    <p>No collection today</p>
+                <% } %>
+            </div>
+            <div>
+                <p><%= tomorrow.date %></p>
+                <% if (tomorrow.zone) { %>
+                    <p>Day <%= tomorrow.zone %> collection</p>
+                <% } else { %>
+                    <p>No collection tomorrow</p>
+                <% } %>
+            </div>
+        </div>
+
+        <h2>Address Search</h2>
+        <p>Enter your address in the search bar to determine your next garbage day and recycling type.</p>
+        <form method="GET" action="/">
+            <input id="search" name="address" type="text" placeholder="eg. 123 Main Street" value="<%= savedAddress || '' %>">
+            <button type="submit">Search</button>
+        </form>
+        <!-- Needs route to clear address cookie and redirect to / to refresh -->
+        <a class="clear-link" href="/clear">Clear saved address</a>
+
+        <!-- Display results -->
+        <!-- *UPDATE AFTER BACKEND CALCULATION/FUNCTIONS READY -->
+        <!-- Not sure if returning a list of all remaining pickup dates by zone or just the next one. -->
+        <div id="results">
+            <% if (result) { %>
+                <p>Results for: <%= result.streetName %></p>
+                <p>Next pickup: <%= result.nextPickupDate %></p>
+                <p>Recycling type: <%= result.recyclingType %></p>
+                <img src="/images/day<%= result.zone %>.png" alt="Day <%= result.zone %> Schedule">
+                <a href="/images/day<%= result.zone %>.png" download>
+                    <button>Download Schedule</button>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
