@@ -48,4 +48,4 @@ async function main() {
 main().catch((err) => {
     console.error("Error uploading CSV data to database:", err);
     process.exit(1);
-})
+});
