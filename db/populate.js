@@ -41,6 +41,7 @@ async function main() {
     );
 
     client.release();
+
     console.log("Database populated successfully.");
     await client.end();
 }
