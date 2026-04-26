@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corner Brook Garbage Collection</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <!-- Hero image with header overlaid -->
     <div id="hero">
         <header>
             <img src="/images/logo.png" alt="City of Corner Brook">
-            <h1>Garbage Collection</h1>
-            <a href="https://www.cornerbrook.com/" target="_blank">
-                <button>🔗 City Website</button>
+            <h1>Garbage & Recycling Collection</h1>
+            <a href="https://www.cornerbrook.com/city-services-bak/garbage-and-recycling/" target="_blank">
+                <button>🔗 <span class="btn-text">City Website</span></button>
             </a>
         </header>
     </div>
@@ -47,7 +47,7 @@
         </div>
 
         <h2>Address Search</h2>
-        <p>Enter your address in the search bar to determine your next garbage day and recycling type.</p>
+        <p>Enter your address in the search bar to view your collection information and your annual collection schedule.</p>
         <form method="GET" action="/">
             <input id="search" name="address" type="text" placeholder="eg. 123 Main Street" value="<%= savedAddress || '' %>">
             <button type="submit">Search</button>
@@ -60,13 +60,18 @@
         <!-- Not sure if returning a list of all remaining pickup dates by zone or just the next one. -->
         <div id="results">
             <% if (result) { %>
-                <p>Results for: <%= result.streetName %></p>
-                <p>Next pickup: <%= result.nextPickupDate %></p>
-                <p>Recycling type: <%= result.recyclingType %></p>
-                <img src="/images/day<%= result.zone %>.png" alt="Day <%= result.zone %> Schedule">
-                <a href="/images/day<%= result.zone %>.png" download>
-                    <button>Download Schedule</button>
-                </a>
+                <div class="results-card">
+                    <p class="results-title">Results for: <%= result.streetName %></p>
+                    <div class="pickup-info">
+                        <p>Pickup Zone: <%= result.zone %></p>
+                        <p>Next Pickup: <%= result.nextPickupDate %></p>
+                        <p>Recycling Type: <%= result.recyclingType %></p>
+                    </div>
+                    <img src="/images/day<%= result.zone %>.png" alt="Day <%= result.zone %> Schedule">
+                    <a href="/images/day<%= result.zone %>.png" download>
+                        <button>Download Schedule</button>
+                    </a>
+                </div>
             <% } %>
         </div>
     </div>
